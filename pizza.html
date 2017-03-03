@@ -1,0 +1,93 @@
+<html>
+<head>
+<title>Заказ пиццы</title>
+
+</head>
+<body>
+
+<form id="form" name="form">
+
+<h1>Выберите пиццу</h1>	
+
+	<input id="pep" type="radio" name="pizza" ="checked" value="<br>- Пеперрони" /> Пеперрони<br>
+	<input id="ass" type="radio" name="pizza" value="<br>- Ассорти"/> Ассорти<br>
+	<input id="sbor" type="radio" name="pizza" value="<br>- Сборная"/> Сборная<br>
+	<br>
+	
+	<h3>Размер пиццы:
+	
+	<select id="razmer" disabled>
+		<option disabled selected value="0">Выберите размер</option>
+		<option value="1">22 см</option>
+		<option value="2">30 см</option>
+    </select>
+	</h3>
+	
+	<h3>Что желаете добавить:
+	<input id="sok" type="checkbox" value="20"/>Сок(20 руб)
+	<input id="kofe" type="checkbox" value="40"/>Кофе(40 руб)
+	<input id="sous" type="checkbox" value="10"/>Соус(10 руб)
+	</h3>
+	
+	<br>
+	<div>Стоимость заказа: <span id="result"></span> руб.</div>
+	<div>Ваш заказ: <span id="zakaz"></span></div>
+	
+	<input type="reset" OnClick="document.getElementById('result').innerHTML = '0'; document.getElementById('zakaz').innerHTML = ''; razmer.disabled=true;">
+	
+	
+	
+</form>
+<script language= javascript>
+document.body.onload = function() {
+	function calc() {
+		var rezultat=0;
+		var zakazvalue='';
+		var d = document;
+		
+		var razmer = d.getElementById("razmer"),
+		pep = d.getElementById("pep"),
+		ass = d.getElementById("ass"),
+		sbor = d.getElementById("sbor"),
+		sok = d.getElementById("sok"),
+		kofe = d.getElementById("kofe"),
+		sous = d.getElementById("sous");
+		
+		if(pep.checked) zakazvalue+= pep.value;
+		if(ass.checked) zakazvalue+= ass.value;
+		if(sbor.checked) zakazvalue+= sbor.value;
+		
+		if (pep.checked || ass.checked || sbor.checked)
+		{
+			razmer.disabled=false;
+			if(razmer.value==1)
+			{
+				rezultat=75;
+				zakazvalue+=' 22см - 75 руб';
+			}
+			if(razmer.value==2)
+			{
+				rezultat=100;
+				zakazvalue+=' 30см - 100руб';
+			}
+		}
+		
+		
+			if(sok.checked)  { rezultat+=parseInt(sok.value); zakazvalue+='<br>- Cок';}
+			if(kofe.checked) { rezultat+=parseInt(kofe.value); zakazvalue+='<br>- Кофе';}
+			if(sous.checked) { rezultat+=parseInt(sous.value); zakazvalue+='<br>- Cоус';}
+		
+		result.innerHTML = rezultat;
+		
+		
+		zakaz.innerHTML = zakazvalue;
+	};
+	
+	
+	
+	document.form.onchange = calc;
+	calc();
+}
+</script>
+</body>
+</html>
