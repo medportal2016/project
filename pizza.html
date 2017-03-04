@@ -20,20 +20,58 @@
 		<option disabled selected value="0">Выберите размер</option>
 		<option value="1">22 см</option>
 		<option value="2">30 см</option>
-    	</select>
+    </select>
 	</h3>
-	
-	<h3>Что желаете добавить:
+
+
+<script> 
+function show_step2() 
+{ 
+var d = document;  
+if ((pep.checked || ass.checked || sbor.checked) && razmer.value!=0)
+{
+if(razmer.value>0)
+d.getElementById('div_form_step2').style.display = 'block'; 
+}
+else
+{
+d.getElementById('div_form_step2').style.display = 'none'; 
+alert('Заполните все поля')
+}
+}
+</script>
+<input type="button" value="Далее" onclick="show_step2();">
+<div id="div_form_step2" style="display:none" > 
+ 
+    <h3>Что желаете добавить:
 	<input id="sok" type="checkbox" value="20"/>Сок(20 руб)
 	<input id="kofe" type="checkbox" value="40"/>Кофе(40 руб)
 	<input id="sous" type="checkbox" value="10"/>Соус(10 руб)
 	</h3>
-	
+
+	<script> 
+	function show_itogo()
+	{
+	var d = document; 
+	d.getElementById('div_form_itogo').style.display = 'block'; 
+	}
+	</script> 
 	<br>
+    <input type="button" value="Итого" onclick="show_itogo();"> 
+    <div id="div_form_itogo" style="display:none" > 
+
 	<div>Стоимость заказа: <span id="result"></span> руб.</div>
 	<div>Ваш заказ: <span id="zakaz"></span></div>
+       
+    </div>
+
+
+</div>
 	
-	<input type="reset" OnClick="document.getElementById('result').innerHTML = '0'; document.getElementById('zakaz').innerHTML = ''; razmer.disabled=true;">
+	
+	
+	
+	
 	
 	
 	
@@ -64,6 +102,7 @@ document.body.onload = function() {
 			{
 				rezultat=75;
 				zakazvalue+=' 22см - 75 руб';
+				sok.style.display='';
 			}
 			if(razmer.value==2)
 			{
